@@ -1,45 +1,44 @@
 package com.example.pizzariasousa_api.Controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.pizzariasousa_api.model.entity.Produto;
+import com.example.pizzariasousa_api.model.services.ProdutoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@RestController 
-@RequestMapping("/api/v1/produtos")
-public class ProdutoController {
+import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
 
- List<Produto> produtos = new ArrayList<Produto>();
 
-@GetMapping 
-public List<Produto> findAll() {
-    Produto p1 = new Produto();
-    p1.setId(1L);
-    p1.setNome("Pizza Meio a Meio");
-    p1.setDescricao("Pizza metade calabresa e metade queijo");
-    p1.setTipo("Pizza salgada");
-    p1.setValorCompra(45);
-    p1.setValorVenda(55);
-    p1.setQuantidadeEstoque(30);
-    p1.setCodStatus(true);
 
-    Produto p2 = new Produto();
-    p2.setId(2L);
-    p2.setNome("Pizza de Chocolate Branco");
-    p2.setDescricao("Pizza com bastante Chocolate Branco");
-    p2.setTipo("Pizza doce");
-    p2.setValorCompra(45);
-    p2.setValorVenda(55);
-    p2.setQuantidadeEstoque(20);
-    p2.setCodStatus(true);
-
-    produtos.add(p1);
-    produtos.add(p2);
+    /* @RequestBody : Corpo da Reqquisição ( Recebendo um objeto JSON )
+    ResponseEntity: Toda resposta HTTP (status, cabeçalhos e corpo), aqui temos mais controle sobre o que é devolvido para o client
+     1. Status HTTP: (200 ok, 201 CREATED, 404 NOT FOUND etc...)
+     2. Headers: ( cabeçalhos extras, como Location, Authorization etc...)
+     3. Body: ( o objeto que será convertido em JSON/XML para o client ) 
+    */
     
-    return produtos;
+    @RestController 
+    @RequestMapping("/api/v1/produtos")
+    public class ProdutoController {
+    
+        @Autowired 
+        private ProdutoService produtoService;
+    
+        @GetMapping 
+        public ResponseEntity<List<Produto>> listarTodos() {
+    
+            return ResponseEntity.ok(produtoService.findAll());
+        }
+
+    @PostMapping 
+    public ResponseEntity<Produto> salvarProduto(@RequestBody Produto produto) {
+        
+        Produto novo = produtoService.save(produto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novo);
     }
+    
+   
+
 }

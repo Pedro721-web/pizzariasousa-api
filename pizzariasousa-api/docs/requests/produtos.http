@@ -1,0 +1,30 @@
+### Criar produto
+POST http://localhost:8080/api/v1/produtos
+Content-Type: application/json
+
+{
+  "nome": "Pizza Margherita",
+  "descricao": "Pizza clássica com molho de tomate, mussarela e manjericão.",
+  "preco": 65.00,
+  "disponivel": true
+}
+
+### Listar todos os produtos
+GET http://localhost:8080/api/v1/produtos
+
+### Listar produto por ID
+GET http://localhost:8080/api/v1/produtos/1000
+
+### Excluir produto por ID
+DELETE http://localhost:8080/api/v1/produtos/1
+
+### Atualizar produto 
+PUT http://localhost:8080/api/v1/produtos/1
+Content-Type: application/json
+
+{
+  "nome": "Pizza Calabresa",
+  "descricao": "Pizza com molho de tomate, mussarela e calabresa.",
+  "preco": 70.00,
+  "disponivel": true
+}
