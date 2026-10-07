@@ -40,6 +40,4 @@ public class Categoria {
         this.codStatus = codStatus;
     }
 
-    
-
 }

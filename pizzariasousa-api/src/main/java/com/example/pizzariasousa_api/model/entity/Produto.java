@@ -2,7 +2,7 @@ package com.example.pizzariasousa_api.model.entity;
 
 import jakarta.persistence.*;
 
-@Entity
+@Entity 
 @Table(name = "Produto") // Quando o nome da classe for igual ao nome da tabela, o @Table facultativo
 public class Produto {
 

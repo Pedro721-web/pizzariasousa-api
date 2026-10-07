@@ -39,6 +39,4 @@ import org.springframework.web.bind.annotation.RequestBody;
         return ResponseEntity.status(HttpStatus.CREATED).body(novo);
     }
     
-   
-
 }

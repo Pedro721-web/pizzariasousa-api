@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class Pedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    @GeneratedValue(strategy = GenerationType.IDENTITY)   
     private Long id;
     @Column(columnDefinition = "DECIMAL(5,2)", nullable = false)
     private double valorPedido;
